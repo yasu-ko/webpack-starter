@@ -1,0 +1,46 @@
+{
+  "name": "NO-NAME",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "NO-NAME",
+  "license": "MIT",
+  "scripts": {
+    "start": "run-p build:sass watch:sass watch:js sass:libs server",
+    "sass": "node-sass --importer node_modules/node-sass-globbing/index.js --output-style compressed src/assets/scss/style.scss public_html/assets/css/style.css",
+    "sass:libs": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js --output-style compressed src/assets/scss/libs.scss public_html/assets/css/libs.css",
+    "autoprefixer": "postcss public_html/assets/css/style.css --use autoprefixer --replace",
+    "server": "node ./server.js",
+    "watch:sass": "chokidar \"src/assets/scss/**/*.scss\" -c \"npm run build:sass\"",
+    "build:sass": "run-s sass -- --source-map false autoprefixer",
+    "watch:js": "webpack -w",
+    "build:js": "webpack"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "autoprefixer": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "browser-sync": "^2.26.13",
+    "chokidar-cli": "^2.1.0",
+    "fs": "^0.0.1-security",
+    "node-sass": "^5.0.0",
+    "node-sass-globbing": "^0.0.23",
+    "node-sass-package-importer": "^5.3.2",
+    "npm-run-all": "^4.1.5",
+    "path": "^0.12.7",
+    "postcss": "^8.2.2",
+    "postcss-cli": "^8.3.1",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1"
+  },
+  "dependencies": {
+    "jquery": "^3.5.1",
+    "reset-css": "^5.0.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "Android >= 4",
+    "iOS >= 11"
+  ]
+}
